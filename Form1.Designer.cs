@@ -28,18 +28,66 @@
         /// </summary>
         private void InitializeComponent()
         {
+            Canvas = new PictureBox();
+            Button1 = new Button();
+            Button2 = new Button();
+            ((System.ComponentModel.ISupportInitialize)Canvas).BeginInit();
             SuspendLayout();
+            // 
+            // Canvas
+            // 
+            Canvas.BackColor = SystemColors.Window;
+            Canvas.Location = new Point(0, 0);
+            Canvas.Margin = new Padding(3, 2, 3, 2);
+            Canvas.Name = "Canvas";
+            Canvas.Size = new Size(724, 407);
+            Canvas.TabIndex = 0;
+            Canvas.TabStop = false;
+            Canvas.Click += Canvas_Click;
+            // 
+            // Button1
+            // 
+            Button1.Location = new Point(771, 20);
+            Button1.Margin = new Padding(3, 2, 3, 2);
+            Button1.Name = "Button1";
+            Button1.Size = new Size(118, 27);
+            Button1.TabIndex = 1;
+            Button1.Text = "Рисовать";
+            Button1.UseVisualStyleBackColor = true;
+            Button1.Click += Button1_Click;
+            // 
+            // Button2
+            // 
+            Button2.Location = new Point(771, 72);
+            Button2.Margin = new Padding(3, 2, 3, 2);
+            Button2.Name = "Button2";
+            Button2.Size = new Size(118, 27);
+            Button2.TabIndex = 2;
+            Button2.Text = "Очистить";
+            Button2.UseVisualStyleBackColor = true;
+            Button2.Click += Button2_Click;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1014, 546);
+            ClientSize = new Size(931, 406);
+            Controls.Add(Button2);
+            Controls.Add(Button1);
+            Controls.Add(Canvas);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Form1";
-            Text = "Form1";
+            Text = "Графика. Лабораторная 2";
+            ((System.ComponentModel.ISupportInitialize)Canvas).EndInit();
             ResumeLayout(false);
         }
 
+
+
         #endregion
+
+        private PictureBox Canvas;
+        private Button Button1;
+        private Button Button2;
     }
 }
