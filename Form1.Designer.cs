@@ -45,6 +45,8 @@
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
+            button3 = new Button();
+            button4 = new Button();
             ((System.ComponentModel.ISupportInitialize)Canvas).BeginInit();
             SuspendLayout();
             // 
@@ -70,7 +72,7 @@
             // 
             // Button2
             // 
-            Button2.Location = new Point(881, 96);
+            Button2.Location = new Point(881, 69);
             Button2.Name = "Button2";
             Button2.Size = new Size(135, 36);
             Button2.TabIndex = 2;
@@ -80,7 +82,7 @@
             // 
             // Button_SetPoint
             // 
-            Button_SetPoint.Location = new Point(881, 204);
+            Button_SetPoint.Location = new Point(881, 213);
             Button_SetPoint.Name = "Button_SetPoint";
             Button_SetPoint.Size = new Size(135, 35);
             Button_SetPoint.TabIndex = 3;
@@ -90,7 +92,7 @@
             // 
             // Button_Turn
             // 
-            Button_Turn.Location = new Point(881, 286);
+            Button_Turn.Location = new Point(881, 295);
             Button_Turn.Name = "Button_Turn";
             Button_Turn.Size = new Size(135, 38);
             Button_Turn.TabIndex = 4;
@@ -100,7 +102,7 @@
             // 
             // Button_Scale
             // 
-            Button_Scale.Location = new Point(881, 330);
+            Button_Scale.Location = new Point(881, 339);
             Button_Scale.Name = "Button_Scale";
             Button_Scale.Size = new Size(135, 38);
             Button_Scale.TabIndex = 5;
@@ -142,7 +144,7 @@
             // 
             // Button_Move
             // 
-            Button_Move.Location = new Point(881, 245);
+            Button_Move.Location = new Point(881, 254);
             Button_Move.Name = "Button_Move";
             Button_Move.Size = new Size(135, 35);
             Button_Move.TabIndex = 10;
@@ -152,7 +154,7 @@
             // 
             // degree
             // 
-            degree.Location = new Point(957, 454);
+            degree.Location = new Point(957, 455);
             degree.Name = "degree";
             degree.Size = new Size(59, 27);
             degree.TabIndex = 11;
@@ -199,11 +201,33 @@
             label3.Text = "Угол:";
             label3.TextAlign = ContentAlignment.TopCenter;
             // 
+            // button3
+            // 
+            button3.Location = new Point(881, 111);
+            button3.Name = "button3";
+            button3.Size = new Size(135, 38);
+            button3.TabIndex = 17;
+            button3.Text = "Поворот на 90";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
+            // button4
+            // 
+            button4.Location = new Point(881, 155);
+            button4.Name = "button4";
+            button4.Size = new Size(137, 55);
+            button4.TabIndex = 18;
+            button4.Text = "Точка пересечения ";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1056, 577);
+            Controls.Add(button4);
+            Controls.Add(button3);
             Controls.Add(label3);
             Controls.Add(label1);
             Controls.Add(label2);
@@ -249,5 +273,7 @@
         private Label label1;
         private Label label2;
         private Label label3;
+        private Button button3;
+        private Button button4;
     }
 }
