@@ -259,6 +259,70 @@ namespace WinFormsApp1
             _drawingState = DrawingState.DRAWING_DOT;
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+            if (!_drawingObject.IsPoligon())
+            {
+                g.Clear(Color.White);
+                return;
+            }
+            float deg = 90;
+            List<float[,]> dot_list = new List<float[,]>();
+            List<Point> dot_list_new = new List<Point>();
+
+            float dist_x = 0;
+            float dist_y = 0;
+            //формируем матрицу-строку координат и матрицу преобразования
+            for (int i = 0; i < _drawingObject.Lines.Count; i++)
+            {
+                dot_list.Add(new float[1, 3] { { _drawingObject.Lines.ElementAt(i).a.X, _drawingObject.Lines.ElementAt(i).a.Y, 1 } });
+                dist_x += _drawingObject.Lines.ElementAt(i).a.X;
+                dist_y += _drawingObject.Lines.ElementAt(i).a.Y;
+            }
+            dist_x = helper.IsEmpty ? dist_x / dot_list.Count : helper.X;
+            dist_y = helper.IsEmpty ? dist_y / dot_list.Count : helper.Y;
+            dot_list.Add(new float[1, 3] { { _drawingObject.Lines.Last().b.X, _drawingObject.Lines.Last().b.Y, 1 } });
+
+            float[,] deg_matrix = new float[3, 3] { {  (float)Math.Cos(deg), (float)Math.Sin(deg), 0 },
+                                                    { -(float)Math.Sin(deg), (float)Math.Cos(deg), 0 },
+            { (float)(-dist_x*Math.Cos(deg) + dist_y*Math.Sin(deg) + dist_x), (float)(-dist_x*Math.Sin(deg) - dist_y*Math.Cos(deg) + dist_y), 1 } };
+            float temp = 0;
+            float[,] m = new float[3, 1];
+
+            //перемножаем с матрицей
+            for (int p = 0; p < dot_list.Count; p++)
+            {
+                for (int i = 0; i < 1; i++)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        temp = 0;
+                        for (int k = 0; k < 3; k++)
+                        {
+                            temp += dot_list.ElementAt(p)[i, k] * deg_matrix[k, j];
+                        }
+                        m[j, 0] = temp;
+                    }
+                }
+                dot_list_new.Add(new Point((int)m[0, 0], (int)m[1, 0]));
+            }
+
+            g.Clear(Color.White);
+            Point prev = dot_list_new.First();
+            for (int i = 0; i < dot_list_new.Count; i++)
+            {
+                g.DrawLine(_pen, prev, dot_list_new.ElementAt(i));
+                prev = dot_list_new.ElementAt(i);
+            }
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
         enum DrawingState { NODRAWING, FREE_DRAWING, DRAWING_DOT }
     }
 
@@ -314,4 +378,5 @@ namespace WinFormsApp1
         public PointF b;
         public Line(PointF a, PointF b) { this.a = a; this.b = b; }
     }
+
 }
