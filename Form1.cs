@@ -105,7 +105,7 @@ namespace WinFormsApp1
             float[,] move_matrix = new float[3, 3] { { 1, 0, 0 }, { 0, 1, 0 }, { dist_x, dist_y, 1 } };
             float temp = 0;
             float[,] m = new float[3, 1];
-
+            _drawingObject.Clear();
             //перемножаем с матрицей
             for (int p = 0; p < dot_list.Count; p++)
             {
@@ -122,8 +122,9 @@ namespace WinFormsApp1
                     }
                 }
                 dot_list_new.Add(new Point((int)m[0, 0], (int)m[1, 0]));
+                _drawingObject.AddDot(dot_list_new.Last());
             }
-
+            _drawingObject.Close();
             g.Clear(Color.White);
             Point prev = dot_list_new.First();
             for (int i = 0; i < dot_list_new.Count; i++)
@@ -140,7 +141,7 @@ namespace WinFormsApp1
                 g.Clear(Color.White);
                 return;
             }
-            float deg = float.Parse(degree.Text) % 360;
+            float deg = (float)Math.PI / 180 * (float.Parse(degree.Text) % 360);
             List<float[,]> dot_list = new List<float[,]>();
             List<Point> dot_list_new = new List<Point>();
 
@@ -153,16 +154,17 @@ namespace WinFormsApp1
                 dist_x += _drawingObject.Lines.ElementAt(i).a.X;
                 dist_y += _drawingObject.Lines.ElementAt(i).a.Y;
             }
-            dist_x = helper.IsEmpty ? dist_x / dot_list.Count : helper.X;
-            dist_y = helper.IsEmpty ? dist_y / dot_list.Count : helper.Y;
+            dist_x = helper.IsEmpty ? (float)(dist_x / dot_list.Count) : helper.X;
+            dist_y = helper.IsEmpty ? (float)(dist_y / dot_list.Count) : helper.Y;
             dot_list.Add(new float[1, 3] { { _drawingObject.Lines.Last().b.X, _drawingObject.Lines.Last().b.Y, 1 } });
 
             float[,] deg_matrix = new float[3, 3] { {  (float)Math.Cos(deg), (float)Math.Sin(deg), 0 },
                                                     { -(float)Math.Sin(deg), (float)Math.Cos(deg), 0 },
             { (float)(-dist_x*Math.Cos(deg) + dist_y*Math.Sin(deg) + dist_x), (float)(-dist_x*Math.Sin(deg) - dist_y*Math.Cos(deg) + dist_y), 1 } };
+            Debug.WriteLine(Math.Sin(deg) + " " + deg);
             float temp = 0;
             float[,] m = new float[3, 1];
-
+            _drawingObject.Clear();
             //перемножаем с матрицей
             for (int p = 0; p < dot_list.Count; p++)
             {
@@ -179,8 +181,9 @@ namespace WinFormsApp1
                     }
                 }
                 dot_list_new.Add(new Point((int)m[0, 0], (int)m[1, 0]));
+                _drawingObject.AddDot(dot_list_new.Last());
             }
-
+            _drawingObject.Close();
             g.Clear(Color.White);
             Point prev = dot_list_new.First();
             for (int i = 0; i < dot_list_new.Count; i++)
@@ -221,7 +224,7 @@ namespace WinFormsApp1
             { -k_x*dist_x + dist_x, -k_y*dist_y + dist_y, 1 } };
             float temp = 0;
             float[,] m = new float[3, 1];
-
+            _drawingObject.Clear();
             //перемножаем с матрицей
             for (int p = 0; p < dot_list.Count; p++)
             {
@@ -238,7 +241,9 @@ namespace WinFormsApp1
                     }
                 }
                 dot_list_new.Add(new Point((int)m[0, 0], (int)m[1, 0]));
+                _drawingObject.AddDot(dot_list_new.Last());
             }
+
 
             g.Clear(Color.White);
             Point prev = dot_list_new.First();
