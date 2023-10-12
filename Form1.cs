@@ -262,12 +262,12 @@ namespace WinFormsApp1
         private void button3_Click(object sender, EventArgs e)
         {
 
-            if (!_drawingObject.IsPoligon())
+            if (!_drawingObject.IsLine())
             {
                 g.Clear(Color.White);
                 return;
             }
-            float deg = 90;
+            float deg = (float)Math.PI / 180 * (float.Parse(degree.Text) % 360);
             List<float[,]> dot_list = new List<float[,]>();
             List<Point> dot_list_new = new List<Point>();
 
@@ -289,7 +289,7 @@ namespace WinFormsApp1
             { (float)(-dist_x*Math.Cos(deg) + dist_y*Math.Sin(deg) + dist_x), (float)(-dist_x*Math.Sin(deg) - dist_y*Math.Cos(deg) + dist_y), 1 } };
             float temp = 0;
             float[,] m = new float[3, 1];
-
+            _drawingObject.Clear();
             //перемножаем с матрицей
             for (int p = 0; p < dot_list.Count; p++)
             {
@@ -306,6 +306,7 @@ namespace WinFormsApp1
                     }
                 }
                 dot_list_new.Add(new Point((int)m[0, 0], (int)m[1, 0]));
+                _drawingObject.AddDot(dot_list_new.Last());
             }
 
             g.Clear(Color.White);
